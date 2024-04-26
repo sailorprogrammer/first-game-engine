@@ -60,14 +60,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="demo-game.cs" />
+    <Compile Include="Engine\Sprite2D.cs" />
+    <Compile Include="Game\demo-game.cs" />
     <Compile Include="Engine\Engine.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Engine\Log.cs" />
     <Compile Include="Engine\Shape2D.cs" />
     <Compile Include="Engine\Vector2.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Game\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="PNG_transparency_demonstration_1.png" />
+    <Content Include="Game\Assets\Sprites\potato.png" />
+    <Content Include="potato.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

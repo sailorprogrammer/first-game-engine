@@ -27,6 +27,7 @@ namespace Engine.Engine
         private Thread GameLoopThread = null;
 
         private static List<Shape2D> AllShapes = new List<Shape2D>();
+        private static List<Sprite2D> AllSprites = new List<Sprite2D>();
 
         public Color backgroundColour = Color.Black;
 
@@ -52,6 +53,16 @@ namespace Engine.Engine
         {
             AllShapes.Remove(shape);
         }
+
+        public static void RegisterSprite(Sprite2D sprite)
+        {
+            AllSprites.Add(sprite);
+        }
+        public static void UnRegisterSprite(Sprite2D sprite)
+        {
+            AllSprites.Remove(sprite);
+        }
+
         void GameLoop()
         {   
             OnLoad();
@@ -81,7 +92,12 @@ namespace Engine.Engine
             {
                 g.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
             }
-            
+            foreach (Sprite2D sprite in AllSprites)
+            {
+                g.DrawImage(sprite.Sprite,sprite.Position.X,sprite.Position.Y,sprite.Scale.X,sprite.Scale.Y);
+            }
+
+
         }
         public abstract void OnLoad();
         public abstract void OnUpdate();
