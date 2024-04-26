@@ -61,13 +61,13 @@ namespace Engine.Engine
                 {
                     
                     OnDraw();
-                    Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });
+                    Window.BeginInvoke((MethodInvoker) delegate { Window.Refresh(); });
                     OnUpdate();
                     Thread.Sleep(1);
                 }
                 catch 
                 {
-                    Log.Error("Game is Booting D:");
+                    Log.Error("Game is Booting or has been terminated D:");
                 }
             }
         }
