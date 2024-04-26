@@ -18,11 +18,12 @@ namespace Engine.Engine
             this.Scale = Scale;
             this.Tag = Tag;
 
-            Log.Info($"[SHAPE2D]({Tag}) - Has been registered");
+            Log.Info($"[SHAPE2D]({Tag}) - Has been Registered");
             Engine.RegisterShape(this);
         }
         public void DestroySelf()
         {
+            Log.Info($"[SHAPE2D]({Tag}) - Has been Destroyed");
             Engine.UnRegisterShape(this);
         }
     }

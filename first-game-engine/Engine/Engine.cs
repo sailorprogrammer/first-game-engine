@@ -59,6 +59,7 @@ namespace Engine.Engine
             {
                 try
                 {
+                    
                     OnDraw();
                     Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });
                     OnUpdate();
@@ -66,7 +67,7 @@ namespace Engine.Engine
                 }
                 catch 
                 {
-                    Log.Error("Window has not been found D: Waiting... ");
+                    Log.Error("Game is Booting D:");
                 }
             }
         }

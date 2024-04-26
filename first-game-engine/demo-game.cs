@@ -28,11 +28,7 @@ namespace Engine
         float x = 1f;
         public override void OnUpdate()
         {
-            Log.Info($"framecount{frame}");
-            frame++;
-            player.Position.X += x;
-            player.Scale.X += x;
-            player.Scale.Y += x;
+            
         }
     }
 }
