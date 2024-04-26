@@ -10,7 +10,7 @@ namespace Engine
      class demo_game : Engine.Engine
     {
         Shape2D player;
-        public demo_game() : base(new Vector2(512, 512), "demo" ){ }
+        public demo_game() : base(new Vector2(1024, 1024), "demo" ){ }
 
         public override void OnLoad()
         {
@@ -24,11 +24,21 @@ namespace Engine
             
         }
 
-        int frame = 0;
-        float x = 1f;
+        int time = 0;
         public override void OnUpdate()
         {
             
+            if (time > 400)
+            {
+                if (player != null)
+                {
+                    player.DestroySelf();
+                    player.DestroySelf();
+                    player = null;
+                }
+           
+            }
+            time++;
         }
     }
 }
