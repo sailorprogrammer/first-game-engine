@@ -25,7 +25,7 @@ namespace Engine
         }
 
         int frame = 0;
-        float x = 1f;
+        float x = 0.2f;
         public override void OnUpdate()
         {
             Log.Info($"framecount{frame}");
