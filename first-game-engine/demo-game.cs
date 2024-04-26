@@ -10,7 +10,7 @@ namespace Engine
      class demo_game : Engine.Engine
     {
         Shape2D player;
-        public demo_game() : base(new Vector2(1024, 1024), "demo" ){ }
+        public demo_game() : base(new Vector2(512, 512), "demo" ){ }
 
         public override void OnLoad()
         {
