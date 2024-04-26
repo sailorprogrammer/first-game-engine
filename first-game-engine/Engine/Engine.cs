@@ -7,7 +7,6 @@ using System.Threading;
 using System.Drawing;
 using System.Windows.Forms;
 using Engine.Engine;
-
 namespace Engine.Engine
 {
     class Canvas : Form
@@ -20,6 +19,8 @@ namespace Engine.Engine
     
     public abstract class Engine
     {
+      
+
         private Vector2 screenSize = new Vector2(512,512);
         private string Title = "First Game";
         private Canvas Window = null;
@@ -31,6 +32,7 @@ namespace Engine.Engine
 
         public Engine(Vector2 screenSize, string title)
         {
+            Log.Info("Game is starting owo");
             this.screenSize = screenSize;
             this.Title = title;
 
@@ -64,7 +66,7 @@ namespace Engine.Engine
                 }
                 catch 
                 {
-                    Console.WriteLine("Game is loading");
+                    Log.Error("Window has not been found D: Waiting... ");
                 }
             }
         }
