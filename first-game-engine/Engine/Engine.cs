@@ -92,7 +92,7 @@ namespace Engine.Engine
             {
                 g.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
             }
-            foreach (Sprite2D sprite in AllSprites)
+            foreach (Sprite2D sprite in AllSprites.ToList())
             {
                 g.DrawImage(sprite.Sprite,sprite.Position.X,sprite.Position.Y,sprite.Scale.X,sprite.Scale.Y);
             }
