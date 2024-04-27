@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using Engine.Engine;
-using System.Windows.Forms.Design;
 using System.Windows.Forms;
-using System.Media;
 namespace Engine
 {
      class demo_game : Engine.Engine
@@ -17,20 +15,22 @@ namespace Engine
         string[,] Map =
         {
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
-            {"1","","","","","","","","","","","","","","","","","","","","","","","","1" },
-            {"1","","","","","","","","","","","","","","","","","","","","","","","","1" },
-            {"1","","","","","","","","","","","","","","","","","","","","","","","","1" },
-            {"1","","","","","","","","","","","","","","","","","","","","","","","","1" },
+            {"1","","","","","1","1","1","1","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","","","","","","","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","","","","","","","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","1","1","","","","","1","1","1","","","","","","","","","","","","","1" },
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
         };
 
 
         Sprite2D player;
+        Sprite2D player2;
         bool up;
         bool left;
         bool down;
         bool right;
 
+        Vector2 LastPos = Vector2.Zero();
         public demo_game() : base(new Vector2(1275, 340), "demo" ){ }
 
         public override void OnLoad()
@@ -51,13 +51,15 @@ namespace Engine
                 }
             }
             player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), "potato.png", "player");
+            player2 = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), "potato.png", "player2");
+          
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
                     if (Map[j, i] == "1")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "wall.png", "Border");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "wall.png", "wall");
                     }
 
                 }
@@ -72,12 +74,12 @@ namespace Engine
             
         }
 
-        int time = 0;
+        int times = 0;
         float x = 1f;
         public override void OnUpdate()
 
         {
-
+            times++;
             if (up)
             {
                 player.Position.Y -= 3f;
@@ -94,7 +96,16 @@ namespace Engine
             {
                 player.Position.X += 3f;
             }
-
+            if(player.IsColliding("wall"))
+            {
+                player.Position.X = LastPos.X;
+                player.Position.Y = LastPos.Y;
+            }
+            else
+            {
+                    LastPos.X = player.Position.X;
+                    LastPos.Y = player.Position.Y;
+            }
 
         }
 

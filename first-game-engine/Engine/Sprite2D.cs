@@ -31,6 +31,31 @@ namespace Engine.Engine
             Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
             Engine.RegisterSprite(this);
         }
+        public bool IsColliding(string tag)
+        {
+       
+            //return false;
+            foreach (Sprite2D b in Engine.AllSprites)
+            {
+                if ( b.Tag == tag)
+                {
+                    if (Position.X < b.Position.X + b.Scale.X &&
+                        Position.X + Scale.X > b.Position.X &&
+                        Position.Y < b.Position.Y + b.Scale.Y &&
+                        Position.Y + Scale.Y > b.Position.Y)
+                    {
+                        return true;
+                    }
+
+                }
+                
+        
+                
+            }
+
+            return false;
+        }
+
         public void DestroySelf()
         {
             Log.Info($"[SPRITE2D]({Tag}) - Has been Destroyed");
