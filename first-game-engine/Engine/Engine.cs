@@ -46,12 +46,16 @@ namespace Engine.Engine
             Window.Paint += Renderer;
             Window.KeyDown += Window_KeyDown;
             Window.KeyUp += Window_KeyUp;
+            Window.FormClosing += Window_FormClosing;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
             Application.Run(Window);
         }
 
-       
+        private void Window_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GameLoopThread.Abort();
+        }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
