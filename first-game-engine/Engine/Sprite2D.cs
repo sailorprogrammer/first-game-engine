@@ -16,22 +16,31 @@ namespace Engine.Engine
         public string Directory = "";
         
         public Bitmap Sprite = null;
-
         public Sprite2D(Vector2 Position, Vector2 Scale, string Directory, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;
             this.Directory = Directory;
             this.Tag = Tag;
-           Image tmp = Image.FromFile($@"assets/{Directory}");
+            Image tmp = Image.FromFile($@"assets/{Directory}");
 
-            Bitmap sprite = new Bitmap(tmp,(int)this.Scale.X,(int)this.Scale.Y);
+            Bitmap sprite = new Bitmap(tmp, (int)this.Scale.X, (int)this.Scale.Y);
             Sprite = sprite;
 
             Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
             Engine.RegisterSprite(this);
         }
-        public bool IsColliding(string tag)
+        public Sprite2D(Vector2 Position, Vector2 Scale,Sprite2D reference, string Tag)
+        {
+            this.Position = Position;
+            this.Scale = Scale;
+            this.Tag = Tag;
+            Sprite = reference.Sprite;
+
+            Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
+            Engine.RegisterSprite(this);
+        }
+        public Sprite2D IsColliding(string tag)
         {
        
             //return false;
@@ -44,7 +53,7 @@ namespace Engine.Engine
                         Position.Y < b.Position.Y + b.Scale.Y &&
                         Position.Y + Scale.Y > b.Position.Y)
                     {
-                        return true;
+                        return b;
                     }
 
                 }
@@ -53,13 +62,18 @@ namespace Engine.Engine
                 
             }
 
-            return false;
+            return null;
         }
 
         public void DestroySelf()
         {
             Log.Info($"[SPRITE2D]({Tag}) - Has been Destroyed");
             Engine.UnRegisterSprite(this);
+        }
+
+        internal bool IsColliding(bool v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

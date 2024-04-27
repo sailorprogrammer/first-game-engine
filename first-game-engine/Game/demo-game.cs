@@ -17,8 +17,8 @@ namespace Engine
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
             {"1","","","","","1","1","1","1","1","1","1","","","","","","","","","","","","","1" },
             {"1","","","","","","","","","1","1","1","","","","","","","","","","","","","1" },
-            {"1","","","","","","","","","1","1","1","","","","","","","","","","","","","1" },
-            {"1","","","1","1","","","","","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","","","","c","","","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","1","1","c","c","","","1","1","1","","","","","","","","","","","","","1" },
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
         };
 
@@ -39,19 +39,24 @@ namespace Engine
             Console.WriteLine("Yay On load Works");
             
             backgroundColour = Color.Black;
+
+            Sprite2D wallref = new Sprite2D(new Vector2(1000,1000), new Vector2(50, 50), "wall.png", "wall");
+            Sprite2D backwallref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "backwall.png", "backwall");
+            Sprite2D potatoref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "potato.png", "potato");
+            Sprite2D monzref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "monz.png", "monz");
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
                     if (Map[j, i] == "")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "backwall.png", "Background");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), backwallref, "Background");
                     }
 
                 }
             }
-            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), "potato.png", "player");
-            player2 = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), "potato.png", "player2");
+            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "player");
+            player2 = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "player2");
           
             for (int i = 0; i < Map.GetLength(1); i++)
             {
@@ -59,13 +64,18 @@ namespace Engine
                 {
                     if (Map[j, i] == "1")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "wall.png", "wall");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), wallref, "wall");
                     }
+                    if (Map[j, i] == "c")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), monzref, "monz");
+                    }
+
 
                 }
             }
-            
-           
+
+
 
 
         }
@@ -96,7 +106,13 @@ namespace Engine
             {
                 player.Position.X += 3f;
             }
-            if(player.IsColliding("wall"))
+            Sprite2D monz = player.IsColliding("monz");
+            if (monz != null)
+            {
+                monz.DestroySelf();
+            }
+
+            if (player.IsColliding("wall") != null)
             {
                 player.Position.X = LastPos.X;
                 player.Position.Y = LastPos.Y;
