@@ -23,7 +23,7 @@ namespace Engine.Engine
             this.Scale = Scale;
             this.Directory = Directory;
             this.Tag = Tag;
-           Image tmp = Image.FromFile($@"..\..\{Directory}");
+           Image tmp = Image.FromFile($@"assets/{Directory}");
 
             Bitmap sprite = new Bitmap(tmp,(int)this.Scale.X,(int)this.Scale.Y);
             Sprite = sprite;

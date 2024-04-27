@@ -31,6 +31,9 @@ namespace Engine.Engine
 
         public Color backgroundColour = Color.Black;
 
+        public Vector2 CameraPosition = Vector2.Zero();
+        public float CameraAngle = 0f;
+
         public Engine(Vector2 screenSize, string title)
         {
             Log.Info("Game is starting owo");
@@ -41,10 +44,24 @@ namespace Engine.Engine
             Window.Size = new Size((int)this.screenSize.X, (int)this.screenSize.Y);
             Window.Text = this.Title;
             Window.Paint += Renderer;
+            Window.KeyDown += Window_KeyDown;
+            Window.KeyUp += Window_KeyUp;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
             Application.Run(Window);
         }
+
+       
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            GetKeyDown(e);
+        }
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            GetKeyUp(e);
+        }
+
         public static void RegisterShape(Shape2D shape)
         {
             AllShapes.Add(shape);
@@ -87,8 +104,9 @@ namespace Engine.Engine
         {
            Graphics g = e.Graphics;
            g.Clear(backgroundColour);
-
-          foreach(Shape2D shape in AllShapes)
+            g.TranslateTransform(CameraPosition.X, CameraPosition.Y);
+            g.RotateTransform(CameraAngle);
+            foreach (Shape2D shape in AllShapes)
             {
                 g.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);
             }
@@ -96,11 +114,13 @@ namespace Engine.Engine
             {
                 g.DrawImage(sprite.Sprite,sprite.Position.X,sprite.Position.Y,sprite.Scale.X,sprite.Scale.Y);
             }
-
+           
 
         }
         public abstract void OnLoad();
         public abstract void OnUpdate();
         public abstract void OnDraw();
+        public abstract void GetKeyDown(KeyEventArgs e);
+        public abstract void GetKeyUp(KeyEventArgs e);
     }
 }
