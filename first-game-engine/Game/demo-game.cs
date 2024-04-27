@@ -39,10 +39,9 @@ namespace Engine
             
             backgroundColour = Color.Black;
 
-            Sprite2D backwallref = new Sprite2D(new Vector2( 50,50), new Vector2(50, 50), "backwall.png", "backwall.png");
-            Sprite2D potatoref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "potato.png", "potato.png");
-            Sprite2D wallref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "wall.png", "wall.png");
-            Sprite2D monzref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "monz.png", "monz.png");
+            Sprite2D backwallref = new Sprite2D(new Vector2( 50,50), new Vector2(50, 50), "backwall.png", "backwall");
+            Sprite2D potatoref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "potato.png", "potato");
+            Sprite2D wallref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "wall.png", "wall");
         
 
             for (int i = 0; i < Map.GetLength(1); i++)
@@ -51,12 +50,12 @@ namespace Engine
                 {
                     if (Map[j, i] == "")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), backwallref, "backwall.png (ref)");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), backwallref, "backwall(ref)");
                     }
 
                 }
             }
-            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "potato.png (ref)");
+            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "potato(ref)");
           
             for (int i = 0; i < Map.GetLength(1); i++)
             {
@@ -64,14 +63,12 @@ namespace Engine
                 {
                     if (Map[j, i] == "1")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), wallref, "wall.png (ref)");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), wallref, "wall (ref)");
                     }
                     if (Map[j, i] == "c")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), monzref, "monz.png (ref)");
+                        new Sprite2D(new Vector2(i* 50, j* 50), new Vector2(50, 50), "monz.png", "monz");
                     }
-
-
                 }
             }
 
@@ -111,7 +108,7 @@ namespace Engine
                 monz.DestroySelf();
             }
 
-                if (player.IsColliding("wall") != null)
+                if (player.IsColliding("wall (ref)") != null)
             {
                 player.Position.X = LastPos.X;
                 player.Position.Y = LastPos.Y;
