@@ -118,7 +118,11 @@ namespace Engine.Engine
                 }
                 foreach (Sprite2D sprite in AllSprites.ToList())
                 {
-                    g.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
+                    if (!sprite.IsReference)
+                    {
+                        g.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
+                    }
+                  
                 }
 
             }

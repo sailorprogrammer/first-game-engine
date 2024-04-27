@@ -14,23 +14,40 @@ namespace Engine.Engine
         public Vector2 Scale = null;
         public string Tag = "";
         public string Directory = "";
+        public bool IsReference = false;
         
         public Bitmap Sprite = null;
+
         public Sprite2D(Vector2 Position, Vector2 Scale, string Directory, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;
             this.Directory = Directory;
             this.Tag = Tag;
-            Image tmp = Image.FromFile($@"assets/{Directory}");
+           Image tmp = Image.FromFile($@"assets/{Directory}");
 
+            Bitmap sprite = new Bitmap(tmp,(int)this.Scale.X,(int)this.Scale.Y);
+            Sprite = sprite;
+
+            Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
+            Engine.RegisterSprite(this);
+        }
+
+        public Sprite2D(string Directory)
+        {
+            this.IsReference = true;
+            this.Directory = Directory;
+
+            Image tmp = Image.FromFile($@"assets/{Directory}");
+            
             Bitmap sprite = new Bitmap(tmp, (int)this.Scale.X, (int)this.Scale.Y);
             Sprite = sprite;
 
             Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
             Engine.RegisterSprite(this);
         }
-        public Sprite2D(Vector2 Position, Vector2 Scale,Sprite2D reference, string Tag)
+
+        public Sprite2D(Vector2 Position, Vector2 Scale, Sprite2D reference, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;
@@ -40,7 +57,7 @@ namespace Engine.Engine
             Log.Info($"[SPRITE2D]({Tag}) - Has been Registered");
             Engine.RegisterSprite(this);
         }
-        public Sprite2D IsColliding(string tag)
+            public Sprite2D IsColliding(string tag)
         {
        
             //return false;

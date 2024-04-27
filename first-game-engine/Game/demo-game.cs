@@ -24,7 +24,6 @@ namespace Engine
 
 
         Sprite2D player;
-        Sprite2D player2;
         bool up;
         bool left;
         bool down;
@@ -40,23 +39,24 @@ namespace Engine
             
             backgroundColour = Color.Black;
 
-            Sprite2D wallref = new Sprite2D(new Vector2(1000,1000), new Vector2(50, 50), "wall.png", "wall");
-            Sprite2D backwallref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "backwall.png", "backwall");
-            Sprite2D potatoref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "potato.png", "potato");
-            Sprite2D monzref = new Sprite2D(new Vector2(1000, 1000), new Vector2(50, 50), "monz.png", "monz");
+            Sprite2D backwallref = new Sprite2D(new Vector2( 50,50), new Vector2(50, 50), "backwall.png", "backwall.png");
+            Sprite2D potatoref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "potato.png", "potato.png");
+            Sprite2D wallref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "wall.png", "wall.png");
+            Sprite2D monzref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "monz.png", "monz.png");
+        
+
             for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
                     if (Map[j, i] == "")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), backwallref, "Background");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), backwallref, "backwall.png (ref)");
                     }
 
                 }
             }
-            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "player");
-            player2 = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "player2");
+            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "potato.png (ref)");
           
             for (int i = 0; i < Map.GetLength(1); i++)
             {
@@ -64,11 +64,11 @@ namespace Engine
                 {
                     if (Map[j, i] == "1")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), wallref, "wall");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), wallref, "wall.png (ref)");
                     }
                     if (Map[j, i] == "c")
                     {
-                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), monzref, "monz");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), monzref, "monz.png (ref)");
                     }
 
 
@@ -84,12 +84,11 @@ namespace Engine
             
         }
 
-        int times = 0;
-        float x = 1f;
+  
         public override void OnUpdate()
 
         {
-            times++;
+       
             if (up)
             {
                 player.Position.Y -= 3f;
@@ -112,7 +111,7 @@ namespace Engine
                 monz.DestroySelf();
             }
 
-            if (player.IsColliding("wall") != null)
+                if (player.IsColliding("wall") != null)
             {
                 player.Position.X = LastPos.X;
                 player.Position.Y = LastPos.Y;
