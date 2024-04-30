@@ -10,14 +10,15 @@ namespace Engine
 {
      class demo_game : Engine.Engine
     {
-       
-        
+        public demo_game() : base(new Vector2(1275, 340), "demo") { }
+                                            //resolution x,y and name of game
+
         string[,] Map =
         {
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
             {"1","","","","","1","1","1","1","1","1","1","","","","","","","","","","","","","1" },
             {"1","","","","","","","","","1","1","1","","","","","","","","","","","","","1" },
-            {"1","","","","","","c","","","1","1","1","","","","","","","","","","","","","1" },
+            {"1","","","","","c","c","","","","","","","","","","","","","","","","","","1" },
             {"1","","","1","1","c","c","","","1","1","1","","","","","","","","","","","","","1" },
             {"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1" },
         };
@@ -30,17 +31,14 @@ namespace Engine
         bool right;
 
         Vector2 LastPos = Vector2.Zero();
-        public demo_game() : base(new Vector2(1275, 340), "demo" ){ }
+       
 
         public override void OnLoad()
         {
-
-            Console.WriteLine("Yay On load Works");
-            
             backgroundColour = Color.Black;
 
             Sprite2D backwallref = new Sprite2D(new Vector2( 50,50), new Vector2(50, 50), "backwall.png", "backwall");
-            Sprite2D potatoref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "potato.png", "potato");
+            Sprite2D potatoref = new Sprite2D(new Vector2(50, 50), new Vector2(48, 48), "potato.png", "potato");
             Sprite2D wallref = new Sprite2D(new Vector2(50, 50), new Vector2(50, 50), "wall.png", "wall");
         
 
@@ -55,7 +53,7 @@ namespace Engine
 
                 }
             }
-            player = new Sprite2D(new Vector2(50, 200), new Vector2(50, 50), potatoref, "potato(ref)");
+            player = new Sprite2D(new Vector2(50, 200), new Vector2(48, 48), potatoref, "potato(ref)");
           
             for (int i = 0; i < Map.GetLength(1); i++)
             {
@@ -72,16 +70,11 @@ namespace Engine
                 }
             }
 
-
-
-
         }
         public override void OnDraw()
         {
             
         }
-
-  
         public override void OnUpdate()
 
         {
@@ -108,15 +101,15 @@ namespace Engine
                 monz.DestroySelf();
             }
 
-                if (player.IsColliding("wall (ref)") != null)
+            if (player.IsColliding("wall (ref)") != null)
             {
                 player.Position.X = LastPos.X;
                 player.Position.Y = LastPos.Y;
             }
             else
             {
-                    LastPos.X = player.Position.X;
-                    LastPos.Y = player.Position.Y;
+                LastPos.X = player.Position.X;
+                LastPos.Y = player.Position.Y;
             }
 
         }
