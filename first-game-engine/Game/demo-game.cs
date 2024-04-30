@@ -32,7 +32,6 @@ namespace Engine
 
         Vector2 LastPos = Vector2.Zero();
        
-
         public override void OnLoad()
         {
             backgroundColour = Color.Black;
